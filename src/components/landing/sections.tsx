@@ -48,17 +48,18 @@ export function Header() {
 export function Hero({ preview }: { preview: React.ReactNode }) {
   return (
     <section className="relative overflow-hidden">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-[560px] bg-[radial-gradient(60%_60%_at_80%_0%,rgb(228_87_46/0.14),transparent_70%),radial-gradient(50%_60%_at_5%_10%,rgb(29_40_51/0.08),transparent_70%)]" />
+      <div className="hero-bg pointer-events-none absolute inset-x-0 top-0 h-[640px]" />
       <div className="relative mx-auto max-w-6xl px-4 pb-10 pt-14 text-center sm:px-6 sm:pt-20">
         <p className="mx-auto mb-6 inline-flex animate-rise items-center gap-2 rounded-full border border-line bg-chalk px-3.5 py-1.5 text-[13px] font-medium text-ink/80 shadow-card">
           <Sparkles size={14} className="text-accent" /> Pensé pour les freelances et micro-entrepreneurs
         </p>
         <h1 className="h-display mx-auto max-w-4xl text-[2.6rem] font-semibold leading-[1.04] sm:text-6xl lg:text-[4.4rem]">
           Des factures qui font pro,{" "}
-          <span className="relative inline-block whitespace-nowrap italic text-accent">
+          <span className="relative inline-block whitespace-nowrap bg-gradient-to-r from-accent to-[#18a3d9] bg-clip-text text-transparent">
             en deux minutes
             <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 300 14" fill="none" preserveAspectRatio="none" aria-hidden="true">
-              <path d="M3 9c40-7 90-8 140-4s100 4 154-2" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+              <defs><linearGradient id="u" x1="0" x2="1"><stop stopColor="#2b5cf0" /><stop offset="1" stopColor="#18a3d9" /></linearGradient></defs>
+              <path d="M3 9c40-7 90-8 140-4s100 4 154-2" stroke="url(#u)" strokeWidth="4" strokeLinecap="round" />
             </svg>
           </span>
           .
@@ -90,7 +91,7 @@ function ConvertVisual() {
       <div className="flex-1 rounded-xl border border-white/10 bg-white/[0.06] p-3.5">
         <p className="text-chalk/50">DEVIS · D-2026-0007</p>
         <p className="mt-1 text-base text-chalk">1 450 €</p>
-        <span className="mt-2 inline-block rounded-full bg-ok/20 px-2 py-0.5 text-[#6ee0aa]">Accepté</span>
+        <span className="mt-2 inline-block rounded-full bg-ok/20 px-2 py-0.5 text-[#5eead4]">Accepté</span>
       </div>
       <ArrowRight className="shrink-0 text-accent" size={22} />
       <div className="flex-1 rounded-xl border border-accent/40 bg-accent/10 p-3.5">
@@ -127,7 +128,7 @@ export function Features() {
     <section id="fonctionnalites" className="relative overflow-hidden bg-slate py-24 text-chalk grain sm:py-32">
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
         <div className="reveal max-w-2xl">
-          <p className="eyebrow">Fonctionnalités</p>
+          <p className="eyebrow !text-[#7aa2ff]">Fonctionnalités</p>
           <h2 className="h-display mt-3 text-4xl font-semibold leading-tight sm:text-5xl">Tout ce qu'il faut, rien de superflu.</h2>
           <p className="mt-4 text-lg text-chalk/65">Une facturation pensée pour celles et ceux qui préfèrent facturer plutôt que remplir des cases.</p>
         </div>
@@ -137,7 +138,7 @@ export function Features() {
               key={title}
               className={`reveal group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.045] p-7 transition duration-300 hover:-translate-y-1 hover:border-accent/50 hover:bg-white/[0.07] ${span}`}
             >
-              <span className="mb-5 grid size-11 place-items-center rounded-2xl bg-accent/15 text-accent transition group-hover:bg-accent group-hover:text-white">
+              <span className="mb-5 grid size-11 place-items-center rounded-2xl bg-accent/25 text-[#8fb0ff] transition group-hover:bg-accent group-hover:text-white">
                 <Icon size={21} />
               </span>
               <h3 className="text-xl font-semibold">{title}</h3>
@@ -254,7 +255,7 @@ export function Pricing() {
             <p className="price-month relative mt-2 text-sm text-chalk/60">Sans engagement.</p>
             <p className="price-year relative mt-2 text-sm text-chalk/60">Soit {(pricing.yearlyCents / 1200).toLocaleString("fr-FR", { maximumFractionDigits: 2 })} € par mois.</p>
             <ul className="relative mt-7 flex-1 space-y-3">
-              {pro.map((f) => (<li key={f} className="flex gap-3 text-[15px]"><Check size={18} className="mt-0.5 shrink-0 text-accent" />{f}</li>))}
+              {pro.map((f) => (<li key={f} className="flex gap-3 text-[15px]"><Check size={18} className="mt-0.5 shrink-0 text-[#7aa2ff]" />{f}</li>))}
             </ul>
             <Link href="/inscription?offre=pro" className="btn btn-primary relative mt-8">Passer en Pro</Link>
           </article>

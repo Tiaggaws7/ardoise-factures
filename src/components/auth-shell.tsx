@@ -11,7 +11,7 @@ export function AuthShell({ title, subtitle, children, footer }: { title: string
         <aside className="grain relative hidden overflow-hidden bg-slate p-12 text-chalk lg:flex lg:flex-col lg:justify-between">
           <div className="relative"><Logo light /></div>
           <div className="relative max-w-md">
-            <p className="h-display text-5xl font-semibold leading-[1.08]">Facturez comme un <em className="text-accent">studio</em>, sans le tableur.</p>
+            <p className="h-display text-5xl font-semibold leading-[1.08]">Facturez comme un <span className="text-[#6f9bff]">studio</span>, sans le tableur.</p>
             <ul className="mt-8 space-y-3 text-chalk/70">
               <li>✓ Numérotation séquentielle et mentions légales</li>
               <li>✓ PDF élégants, en un clic</li>

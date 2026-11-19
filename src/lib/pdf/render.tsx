@@ -20,11 +20,11 @@ function registerFonts() {
   if (registered) return;
   registered = true;
   Font.register({
-    family: "Inter",
+    family: "Geist",
     fonts: [
-      { src: path.join(dir, "inter-latin-400-normal.woff"), fontWeight: 400 },
-      { src: path.join(dir, "inter-latin-600-normal.woff"), fontWeight: 600 },
-      { src: path.join(dir, "inter-latin-700-normal.woff"), fontWeight: 700 },
+      { src: path.join(dir, "geist-latin-400-normal.woff"), fontWeight: 400 },
+      { src: path.join(dir, "geist-latin-600-normal.woff"), fontWeight: 600 },
+      { src: path.join(dir, "geist-latin-700-normal.woff"), fontWeight: 700 },
     ],
   });
   Font.register({
@@ -66,10 +66,10 @@ type Theme = {
 };
 
 const THEMES: Record<TemplateId, Theme> = {
-  classique: { font: "Inter", heading: "Inter", ink: "#1c2530", muted: "#6b7684", accent: "#1c2530", rule: "#dfe3e8", paper: "#ffffff", headFill: "#f1f3f5", headText: "#1c2530" },
-  moderne: { font: "Inter", heading: "Inter", ink: "#1c2530", muted: "#6b7684", accent: "#e4572e", rule: "#ebe7e1", paper: "#ffffff", headFill: "#1c2530", headText: "#ffffff" },
-  minimal: { font: "Inter", heading: "Inter", ink: "#111418", muted: "#8a929c", accent: "#111418", rule: "#e6e8eb", paper: "#ffffff", headFill: "#ffffff", headText: "#8a929c" },
-  elegant: { font: "Inter", heading: "Fraunces", ink: "#26211b", muted: "#7b7164", accent: "#a2762c", rule: "#e3d9c6", paper: "#fbf7ef", headFill: "#fbf7ef", headText: "#a2762c" },
+  classique: { font: "Geist", heading: "Geist", ink: "#0b1633", muted: "#5f6d8a", accent: "#0c1f4a", rule: "#dfe6f2", paper: "#ffffff", headFill: "#eef3fc", headText: "#1c2530" },
+  moderne: { font: "Geist", heading: "Geist", ink: "#0b1633", muted: "#5f6d8a", accent: "#2b5cf0", rule: "#dfe6f2", paper: "#ffffff", headFill: "#0c1f4a", headText: "#ffffff" },
+  minimal: { font: "Geist", heading: "Geist", ink: "#111418", muted: "#8a929c", accent: "#111418", rule: "#e6e8eb", paper: "#ffffff", headFill: "#ffffff", headText: "#8a929c" },
+  elegant: { font: "Geist", heading: "Fraunces", ink: "#26211b", muted: "#7b7164", accent: "#a2762c", rule: "#e3d9c6", paper: "#fbf7ef", headFill: "#fbf7ef", headText: "#a2762c" },
 };
 
 const qty = (n: number) => n.toLocaleString("fr-FR", { maximumFractionDigits: 2 }).replace(/[  ]/g, " ");
@@ -139,7 +139,7 @@ function InvoiceDoc({ data, template, watermark }: { data: PdfData; template: Te
       <View style={{ backgroundColor: t.accent, paddingHorizontal: 44, paddingTop: 36, paddingBottom: 26, marginBottom: 28, flexDirection: "row", justifyContent: "space-between", alignItems: "flex-end" }}>
         <View>
           <Text style={{ color: "#fff", fontSize: 30, fontWeight: 700, letterSpacing: -0.5 }}>{title}</Text>
-          <Text style={{ color: "#ffe7de", fontSize: 11, marginTop: 3 }}>{number}</Text>
+          <Text style={{ color: "#dbe6ff", fontSize: 11, marginTop: 3 }}>{number}</Text>
         </View>
         <View style={{ alignItems: "flex-end" }}>
           {data.seller.logo ? <Logo seller={data.seller} t={t} size={36} /> : <Text style={{ color: "#fff", fontSize: 15, fontWeight: 600 }}>{data.seller.name}</Text>}
