@@ -44,6 +44,12 @@ export async function startCheckout(formData: FormData) {
       success_url: `${appUrl()}/abonnement?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${appUrl()}/abonnement?msg=annule`,
       locale: "fr",
+      // Service numérique exécuté immédiatement : information de renonciation à la rétractation (art. L221-28).
+      custom_text: {
+        submit: {
+          message: `En vous abonnant, vous acceptez les CGV (${appUrl()}/cgu-cgv) et demandez l'exécution immédiate du service : vous renoncez à votre droit de rétractation.`,
+        },
+      },
     });
     url = session.url!;
   } catch (e) {

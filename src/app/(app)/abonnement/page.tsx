@@ -44,7 +44,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ s
 
       {msg === "bienvenue-pro" && <Notice tone="ok">🎉 Bienvenue dans l'offre Pro : factures illimitées et 4 modèles de PDF sont débloqués.</Notice>}
       {msg === "annule" && <Notice tone="info">Paiement annulé : vous n'avez rien payé.</Notice>}
-      {msg === "demo" && <Notice tone="info">Le compte de démo ne passe pas par Stripe. Créez un vrai compte pour tester le paiement (carte test 4242 4242 4242 4242).</Notice>}
+      {msg === "demo" && <Notice tone="info">Le compte de démo ne passe pas par Stripe. Créez un vrai compte pour passer en Pro.</Notice>}
       {msg === "stripe-erreur" && <Notice tone="bad">Stripe a refusé la requête : vérifiez STRIPE_SECRET_KEY (clé de test valide) puis réessayez.</Notice>}
       {msg === "stripe-manquant" && <Notice tone="warn">Stripe n'est pas configuré : renseignez STRIPE_SECRET_KEY dans .env.local (voir le README).</Notice>}
 
@@ -53,7 +53,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ s
           <h2 className="text-lg font-semibold">Compte de démo</h2>
           <p className="mt-2 max-w-xl text-ink/70">
             Vous êtes sur l'offre <strong>{pro ? "Pro" : "Gratuite"}</strong>. Utilisez le bouton « Voir l'offre … » en haut de page pour comparer les deux expériences.
-            Pour tester le vrai parcours de paiement Stripe, <Link href="/inscription" className="font-semibold text-accent hover:underline">créez un compte gratuit</Link> puis passez en Pro avec la carte de test.
+            Pour passer réellement en Pro, <Link href="/inscription" className="font-semibold text-accent hover:underline">créez un compte gratuit</Link> puis abonnez-vous.
           </p>
         </div>
       ) : pro ? (

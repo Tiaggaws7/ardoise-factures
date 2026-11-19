@@ -10,7 +10,7 @@ let client: Stripe | null = null;
 export const stripeConfigured = () => Boolean(process.env.STRIPE_SECRET_KEY);
 
 /** Test ou live : uniquement déterminé par la clé secrète fournie. */
-export const stripeIsTestMode = () => !process.env.STRIPE_SECRET_KEY?.startsWith("sk_live_");
+export { isTestMode as stripeIsTestMode } from "./mode";
 
 export function getStripe(): Stripe {
   const key = process.env.STRIPE_SECRET_KEY;

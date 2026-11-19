@@ -15,6 +15,7 @@ import {
 import { startDemo } from "@/actions/auth";
 import { Logo } from "@/components/logo";
 import { brand, pricing } from "@/config/site";
+import { isTestMode } from "@/lib/mode";
 import { MiniInvoice } from "./mini-invoice";
 
 export function DemoButton({ className = "btn btn-ghost btn-lg", children = "Essayer la démo" }: { className?: string; children?: React.ReactNode }) {
@@ -261,7 +262,11 @@ export function Pricing() {
           </article>
         </div>
         <p className="mt-6 text-center text-[13px] text-muted">
-          Démonstration : le paiement passe par Stripe en <strong>mode test</strong> — utilisez la carte 4242 4242 4242 4242. Aucun débit réel.
+          {isTestMode() ? (
+            <>Démonstration : le paiement passe par Stripe en <strong>mode test</strong> — utilisez la carte 4242 4242 4242 4242. Aucun débit réel.</>
+          ) : (
+            <>Paiement sécurisé par Stripe. Résiliable à tout moment depuis votre espace.</>
+          )}
         </p>
       </div>
     </section>
@@ -274,7 +279,9 @@ const QA = [
   ["Comment fonctionne la numérotation ?", "Chaque document reçoit son numéro (D-2026-0001, F-2026-0001…) au moment de l'émission, pas avant : les brouillons n'en ont pas, donc la séquence ne comporte jamais de trou. Une facture émise ne peut plus être modifiée."],
   ["Que se passe-t-il à la limite de 3 factures ?", "Dans l'offre gratuite, vous pouvez émettre 3 factures par mois civil. Vos brouillons, devis et clients restent disponibles ; passez en Pro pour lever la limite instantanément."],
   ["Puis-je annuler le Pro ?", "À tout moment depuis votre espace abonnement (portail Stripe). Vous gardez le Pro jusqu'à la fin de la période payée, puis vous repassez en gratuit sans rien perdre."],
-  ["Est-ce un vrai service ?", "C'est un projet de démonstration qui fonctionne de bout en bout, publié en open source. Les paiements sont en mode test : aucune somme n'est débitée. Utilisez le bouton « Essayer la démo » pour explorer avec des données fictives."],
+  ["Est-ce un vrai service ?", isTestMode()
+    ? "C'est un projet de démonstration qui fonctionne de bout en bout, publié en open source. Les paiements sont en mode test : aucune somme n'est débitée. Utilisez le bouton « Essayer la démo » pour explorer avec des données fictives."
+    : "C'est un service réel, développé en solo et publié en open source. L'abonnement Pro est facturé via Stripe. Le bouton « Essayer la démo » permet d'explorer l'app avec des données fictives, sans inscription."],
   ["Mes données sont-elles protégées ?", "Mots de passe hachés (bcrypt), connexions chiffrées, base Postgres hébergée en Europe. Détails dans la politique de confidentialité."],
 ];
 
@@ -325,7 +332,7 @@ export function Footer() {
         <div className="max-w-xs">
           <Logo />
           <p className="mt-3 text-sm text-muted">{brand.tagline}</p>
-          <p className="mt-3 text-xs text-muted">Projet de démonstration — paiements en mode test.</p>
+          <p className="mt-3 text-xs text-muted">{isTestMode() ? "Projet de démonstration — paiements en mode test." : "Projet indépendant édité par Tiago Buil."}</p>
         </div>
         <nav className="grid grid-cols-2 gap-x-14 gap-y-2 text-sm" aria-label="Pied de page">
           <Link href="/mentions-legales" className="text-ink/70 hover:text-ink">Mentions légales</Link>

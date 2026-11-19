@@ -1,9 +1,9 @@
 import { Info } from "lucide-react";
-import { stripeIsTestMode } from "@/lib/stripe";
+import { isTestMode } from "@/lib/mode";
 
 /** Bandeau discret : projet de démonstration, paiements Stripe en mode test. */
 export function DemoBanner() {
-  if (process.env.SHOW_DEMO_BANNER === "false" || !stripeIsTestMode()) return null;
+  if (process.env.SHOW_DEMO_BANNER === "false" || !isTestMode()) return null;
   return (
     <div className="bg-slate text-[12.5px] text-chalk/90">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-2 gap-y-0.5 px-4 py-1.5 text-center">

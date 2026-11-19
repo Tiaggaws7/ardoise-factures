@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { brand, pricing, publisher as p } from "@/config/site";
+import { isTestMode } from "@/lib/mode";
 
 export const metadata: Metadata = { title: "CGU / CGV" };
 
@@ -15,12 +16,20 @@ export default function Page() {
         ({p.status}, SIRET {p.siret}).
       </p>
 
-      <h2>2. Un service de démonstration</h2>
-      <p>
-        {brand.name} est un projet de démonstration. Les paiements sont traités par Stripe en <strong>mode test</strong> : la carte de test
-        4242 4242 4242 4242 permet de simuler un abonnement, <strong>sans aucun débit réel</strong>. Le service est fourni « en l'état », sans garantie
-        de disponibilité ni de conservation des données ; il peut être suspendu ou réinitialisé à tout moment.
-      </p>
+      <h2>2. Nature du service</h2>
+      {isTestMode() ? (
+        <p>
+          {brand.name} est un projet de démonstration. Les paiements sont traités par Stripe en <strong>mode test</strong> : la carte de test
+          4242 4242 4242 4242 permet de simuler un abonnement, <strong>sans aucun débit réel</strong>. Le service est fourni « en l'état », sans garantie
+          de disponibilité ni de conservation des données ; il peut être suspendu ou réinitialisé à tout moment.
+        </p>
+      ) : (
+        <p>
+          {brand.name} est un service en ligne indépendant, fourni « en l'état », sans garantie de disponibilité ni de conservation des données :
+          il peut évoluer, être suspendu ou cesser à tout moment. Les paiements de l'offre Pro sont traités par Stripe ; aucune donnée de carte n'est
+          conservée par l'éditeur.
+        </p>
+      )}
 
       <h2>3. Compte</h2>
       <p>
@@ -40,7 +49,7 @@ export default function Page() {
         L'abonnement Pro est reconductible tacitement à chaque échéance. L'utilisateur le résilie à tout moment depuis son espace « Abonnement »
         (portail Stripe) ; la résiliation prend effet à la fin de la période en cours, sans remboursement au prorata. Conformément à l'article
         L221-28 du Code de la consommation, le service numérique étant exécuté dès la souscription avec l'accord du client, le droit de rétractation
-        ne s'applique pas à l'exécution immédiate. Dans le cadre de la démonstration, aucun montant n'étant prélevé, aucune demande de remboursement n'est à prévoir.
+        ne s'applique pas à l'exécution immédiate.{isTestMode() ? " Dans le cadre de la démonstration, aucun montant n'étant prélevé, aucune demande de remboursement n'est à prévoir." : " Pour toute demande de remboursement exceptionnelle, écrivez à " + p.email + "."}
       </p>
 
       <h2>6. Responsabilité de l'utilisateur</h2>

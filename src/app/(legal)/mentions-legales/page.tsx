@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { brand, publisher as p } from "@/config/site";
+import { isTestMode } from "@/lib/mode";
 
 export const metadata: Metadata = { title: "Mentions légales" };
 
@@ -23,11 +24,18 @@ export default function Page() {
       </ul>
 
       <h2>Nature du service</h2>
-      <p>
-        {brand.name} est un <strong>projet de démonstration</strong> présenté dans un portfolio de développement web. Il fonctionne de bout
-        en bout, mais le paiement par Stripe est configuré en <strong>mode test</strong> : aucune somme n'est réellement prélevée. Les
-        comptes de démonstration contiennent des données fictives et sont supprimés automatiquement.
-      </p>
+      {isTestMode() ? (
+        <p>
+          {brand.name} est un <strong>projet de démonstration</strong> présenté dans un portfolio de développement web. Il fonctionne de bout
+          en bout, mais le paiement par Stripe est configuré en <strong>mode test</strong> : aucune somme n'est réellement prélevée. Les
+          comptes de démonstration contiennent des données fictives et sont supprimés automatiquement.
+        </p>
+      ) : (
+        <p>
+          {brand.name} est un service en ligne indépendant, également présenté dans un portfolio de développement web. L'abonnement Pro est
+          facturé via Stripe. Les comptes de démonstration contiennent des données fictives et sont supprimés automatiquement.
+        </p>
+      )}
 
       <h2>Hébergement et prestataires techniques</h2>
       <ul>

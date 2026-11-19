@@ -68,7 +68,12 @@ Les produits et prix sont déclarés à la volée (`price_data`) : rien à crée
    | `STRIPE_WEBHOOK_SECRET` | `whsec_…` (étape 5) |
 4. **Déployez.** Le script de build applique automatiquement les migrations Drizzle sur Neon (`scripts/migrate.mts`).
 5. **Webhook Stripe** — Dashboard → Développeurs → Webhooks → *Ajouter un endpoint* : `https://<votre-projet>.vercel.app/api/stripe/webhook`, événements `checkout.session.completed`, `customer.subscription.created`, `customer.subscription.updated`, `customer.subscription.deleted`. Copiez le *Signing secret* dans `STRIPE_WEBHOOK_SECRET` puis redéployez.
-6. **Test → live** : il suffit de remplacer `STRIPE_SECRET_KEY` (et le webhook) par les clés live. Le bandeau « démo / carte test » disparaît tout seul avec une clé `sk_live_`.
+6. **Test → live** : aucun changement de code, seulement les variables d'environnement **de Vercel** :
+   - `STRIPE_SECRET_KEY` = clé `sk_live_…` ;
+   - un **second endpoint webhook en mode live** (Stripe → bascule « live » → Développeurs → Webhooks, même URL et mêmes 4 événements) dont le `whsec_…` remplace `STRIPE_WEBHOOK_SECRET` ;
+   - redéployez (les textes « mode test / carte 4242 » des pages et des CGU disparaissent automatiquement avec une clé live).
+   - Gardez la clé live **uniquement dans Vercel**, jamais dans `.env.local` : en local, utilisez toujours une clé `sk_test_`.
+   - Dans Stripe live, vérifiez Paramètres → Facturation → Portail client (l'app crée une configuration par défaut si besoin) et le nom public de l'entreprise affiché sur Checkout.
 
 ## Personnalisation
 
