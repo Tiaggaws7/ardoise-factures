@@ -51,7 +51,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ t
               {docs.map((d) => (
                 <tr key={d.id} className="group relative transition hover:bg-paper">
                   <td className="px-5 py-3.5">
-                    <Link href={`/documents/${d.id}`} className="font-semibold after:absolute after:inset-0 group-hover:text-accent">{d.number ?? "Brouillon"}</Link>
+                    <Link href={`/documents/${d.id}`} className="whitespace-nowrap font-semibold after:absolute after:inset-0 group-hover:text-accent">{d.number ?? "Brouillon"}</Link>
                     <span className="block text-xs text-muted">{d.type === "invoice" ? "Facture" : "Devis"}{d.subject ? ` · ${d.subject}` : ""}</span>
                   </td>
                   <td className="hidden px-3 py-3.5 sm:table-cell">{d.clientName}</td>

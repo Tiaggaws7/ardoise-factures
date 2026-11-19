@@ -43,7 +43,7 @@ export default async function Page({ params, searchParams }: { params: Promise<{
 
   const notice = (() => {
     if (!msg) return null;
-    if (msg === "emis") return <Notice tone="ok">✓ {label} émis(e) sous le numéro <strong>{doc.number}</strong>. Vous pouvez télécharger le PDF.</Notice>;
+    if (msg === "emis") return <Notice tone="ok">✓ {isInvoice ? "Facture émise" : "Devis émis"} sous le numéro <strong>{doc.number}</strong>. Vous pouvez télécharger le PDF.</Notice>;
     if (msg === "converti") return <Notice tone="ok">✓ Devis converti en facture brouillon. Vérifiez-la puis émettez-la.</Notice>;
     if (msg.startsWith("limite:"))
       return (

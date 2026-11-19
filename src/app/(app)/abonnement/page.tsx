@@ -45,6 +45,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ s
       {msg === "bienvenue-pro" && <Notice tone="ok">🎉 Bienvenue dans l'offre Pro : factures illimitées et 4 modèles de PDF sont débloqués.</Notice>}
       {msg === "annule" && <Notice tone="info">Paiement annulé : vous n'avez rien payé.</Notice>}
       {msg === "demo" && <Notice tone="info">Le compte de démo ne passe pas par Stripe. Créez un vrai compte pour tester le paiement (carte test 4242 4242 4242 4242).</Notice>}
+      {msg === "stripe-erreur" && <Notice tone="bad">Stripe a refusé la requête : vérifiez STRIPE_SECRET_KEY (clé de test valide) puis réessayez.</Notice>}
       {msg === "stripe-manquant" && <Notice tone="warn">Stripe n'est pas configuré : renseignez STRIPE_SECRET_KEY dans .env.local (voir le README).</Notice>}
 
       {user.isDemo ? (

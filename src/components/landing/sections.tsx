@@ -53,7 +53,7 @@ export function Hero({ preview }: { preview: React.ReactNode }) {
         <p className="mx-auto mb-6 inline-flex animate-rise items-center gap-2 rounded-full border border-line bg-chalk px-3.5 py-1.5 text-[13px] font-medium text-ink/80 shadow-card">
           <Sparkles size={14} className="text-accent" /> Pensé pour les freelances et micro-entrepreneurs
         </p>
-        <h1 className="h-display mx-auto max-w-4xl animate-rise text-[2.6rem] font-semibold leading-[1.04] sm:text-6xl lg:text-[4.4rem]" style={{ animationDelay: "60ms" }}>
+        <h1 className="h-display mx-auto max-w-4xl text-[2.6rem] font-semibold leading-[1.04] sm:text-6xl lg:text-[4.4rem]">
           Des factures qui font pro,{" "}
           <span className="relative inline-block whitespace-nowrap italic text-accent">
             en deux minutes
@@ -63,7 +63,7 @@ export function Hero({ preview }: { preview: React.ReactNode }) {
           </span>
           .
         </h1>
-        <p className="mx-auto mt-7 max-w-2xl animate-rise text-lg leading-relaxed text-ink/70" style={{ animationDelay: "140ms" }}>
+        <p className="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-ink/70">
           {brand.name} crée vos devis et factures avec numérotation, TVA et mentions légales justes, les transforme en PDF élégants
           et vous montre qui vous doit quoi. Gratuit pour démarrer.
         </p>
@@ -84,13 +84,42 @@ export function Hero({ preview }: { preview: React.ReactNode }) {
   );
 }
 
+function ConvertVisual() {
+  return (
+    <div className="mt-7 flex items-center gap-3 text-[11px] font-semibold" aria-hidden="true">
+      <div className="flex-1 rounded-xl border border-white/10 bg-white/[0.06] p-3.5">
+        <p className="text-chalk/50">DEVIS · D-2026-0007</p>
+        <p className="mt-1 text-base text-chalk">1 450 €</p>
+        <span className="mt-2 inline-block rounded-full bg-ok/20 px-2 py-0.5 text-[#6ee0aa]">Accepté</span>
+      </div>
+      <ArrowRight className="shrink-0 text-accent" size={22} />
+      <div className="flex-1 rounded-xl border border-accent/40 bg-accent/10 p-3.5">
+        <p className="text-chalk/50">FACTURE · F-2026-0012</p>
+        <p className="mt-1 text-base text-chalk">1 450 €</p>
+        <span className="mt-2 inline-block rounded-full bg-white/10 px-2 py-0.5 text-chalk/80">Brouillon</span>
+      </div>
+    </div>
+  );
+}
+
+function ChartVisual() {
+  const h = [38, 56, 44, 70, 52, 84, 62, 96];
+  return (
+    <div className="mt-7 flex h-24 items-end gap-2" aria-hidden="true">
+      {h.map((v, i) => (
+        <div key={i} className={`flex-1 rounded-t-md ${i === h.length - 1 ? "bg-accent" : "bg-white/20"}`} style={{ height: `${v}%` }} />
+      ))}
+    </div>
+  );
+}
+
 const FEATURES = [
-  { icon: FileSignature, title: "Du devis à la facture, en un clic", text: "Le client accepte ? Transformez le devis en facture : lignes, tarifs et client sont repris. Rien à ressaisir.", span: "lg:col-span-2" },
+  { icon: FileSignature, title: "Du devis à la facture, en un clic", text: "Le client accepte ? Transformez le devis en facture : lignes, tarifs et client sont repris. Rien à ressaisir.", span: "lg:col-span-2", visual: "convert" },
   { icon: Hash, title: "Numérotation sans trou", text: "Séquence continue D-2026-0001, F-2026-0001… attribuée à l'émission, comme l'exige la loi.", span: "" },
   { icon: BadgeCheck, title: "Mentions légales prêtes", text: "SIRET, IBAN, « TVA non applicable, art. 293 B du CGI », pénalités de retard : saisies une fois, ajoutées partout.", span: "" },
   { icon: Palette, title: "PDF dignes d'un studio", text: "Quatre modèles soignés, votre logo, vos couleurs. Téléchargement instantané.", span: "" },
   { icon: Banknote, title: "Suivi des paiements", text: "Brouillon, envoyée, payée, en retard : le retard est détecté tout seul à l'échéance.", span: "" },
-  { icon: LineChart, title: "Tableau de bord clair", text: "Chiffre d'affaires par mois, factures en attente, impayés en retard : l'essentiel d'un coup d'œil.", span: "lg:col-span-2" },
+  { icon: LineChart, title: "Tableau de bord clair", text: "Chiffre d'affaires par mois, factures en attente, impayés en retard : l'essentiel d'un coup d'œil.", span: "lg:col-span-2", visual: "chart" },
 ];
 
 export function Features() {
@@ -103,7 +132,7 @@ export function Features() {
           <p className="mt-4 text-lg text-chalk/65">Une facturation pensée pour celles et ceux qui préfèrent facturer plutôt que remplir des cases.</p>
         </div>
         <div className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {FEATURES.map(({ icon: Icon, title, text, span }) => (
+          {FEATURES.map(({ icon: Icon, title, text, span, visual }) => (
             <article
               key={title}
               className={`reveal group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.045] p-7 transition duration-300 hover:-translate-y-1 hover:border-accent/50 hover:bg-white/[0.07] ${span}`}
@@ -113,6 +142,8 @@ export function Features() {
               </span>
               <h3 className="text-xl font-semibold">{title}</h3>
               <p className="mt-2 leading-relaxed text-chalk/65">{text}</p>
+              {visual === "convert" && <ConvertVisual />}
+              {visual === "chart" && <ChartVisual />}
             </article>
           ))}
         </div>

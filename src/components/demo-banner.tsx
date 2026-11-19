@@ -11,7 +11,7 @@ export function DemoBanner() {
         <span>
           Projet de démonstration — paiements Stripe en <strong className="font-semibold">mode test</strong>. Carte test :{" "}
           <code className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-[12px] tracking-wide">4242 4242 4242 4242</code>
-          , date et CVC au choix.
+          <span className="hidden sm:inline">, date et CVC au choix</span>.
         </span>
       </div>
     </div>

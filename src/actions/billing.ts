@@ -31,19 +31,26 @@ export async function startCheckout(formData: FormData) {
   if (user.plan === "pro") redirect("/abonnement");
   const interval: BillingInterval = formData.get("interval") === "year" ? "year" : "month";
 
-  const customer = await ensureCustomer(user.id, user.email, user.name, user.stripeCustomerId);
-  const session = await getStripe().checkout.sessions.create({
-    mode: "subscription",
-    customer,
-    client_reference_id: user.id,
-    line_items: [lineItemFor(interval)],
-    allow_promotion_codes: true,
-    billing_address_collection: "auto",
-    success_url: `${appUrl()}/abonnement?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${appUrl()}/abonnement?msg=annule`,
-    locale: "fr",
-  });
-  redirect(session.url!);
+  let url: string;
+  try {
+    const customer = await ensureCustomer(user.id, user.email, user.name, user.stripeCustomerId);
+    const session = await getStripe().checkout.sessions.create({
+      mode: "subscription",
+      customer,
+      client_reference_id: user.id,
+      line_items: [lineItemFor(interval)],
+      allow_promotion_codes: true,
+      billing_address_collection: "auto",
+      success_url: `${appUrl()}/abonnement?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${appUrl()}/abonnement?msg=annule`,
+      locale: "fr",
+    });
+    url = session.url!;
+  } catch (e) {
+    console.error("Stripe Checkout", e);
+    redirect("/abonnement?msg=stripe-erreur");
+  }
+  redirect(url);
 }
 
 /** Ouvre le Customer Portal (changer de carte, résilier, factures). */
