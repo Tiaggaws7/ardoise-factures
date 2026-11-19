@@ -12,14 +12,14 @@ export const brand = {
 
 /** Éditeur du service — repris de lamainbasque.fr (à adapter si besoin). */
 export const publisher = {
-  name: "Thiago Buil",
+  name: "Tiago Buil",
   status: "Entrepreneur individuel (auto-entrepreneur) · développeur web freelance",
   siret: "988 494 035 00013",
   address: "5 rue Roland, 64600 Anglet, France",
   email: "tiagobuil.tb@gmail.com",
   phone: "06 99 73 34 36",
   vat: "TVA non applicable, art. 293 B du CGI",
-  director: "Thiago Buil",
+  director: "Tiago Buil",
   host: "Vercel Inc. (États-Unis) — https://vercel.com",
   database: "Neon, Inc. (États-Unis) — https://neon.tech",
   payments: "Stripe Payments Europe, Ltd. (Irlande) — https://stripe.com",
